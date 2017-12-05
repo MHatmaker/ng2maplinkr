@@ -24,11 +24,11 @@ export class MapComponent {
       container: this.elementRef.nativeElement.firstChild,
       map: this.mapService.map,
       center: new Point({
-        x: -82.44,
-        y: 35.61,
+        x: -87.620692,
+        y: 41.888941,
         spatialReference: new SpatialReference({ wkid: 4326 })
       }),
-      zoom: 14
+      zoom: 15
     });
     this.viewCreated.next(this.mapView);
   }
