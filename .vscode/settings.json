@@ -1,0 +1,27 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "app/**/*.js": {
+      "when": "$(basename).ts"
+    },
+    "app/**/*.js.map": true
+  },
+  // Control whether tslint is enabled for TypeScript files or not.
+  "tslint.enable": true,
+  // The number of spaces a tab is equal to. This setting is overriden based on the file contents when `editor.detectIndentation` is on.
+  "editor.tabSize": 2,
+  // Insert spaces when pressing Tab. This setting is overriden based on the file contents when `editor.detectIndentation` is on.
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "vsicons.presets.angular": true,
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/build": true,
+    "**/dist": true
+  }
+}
