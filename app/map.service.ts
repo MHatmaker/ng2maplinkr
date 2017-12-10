@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import Map = require('esri/Map');
 
 @Injectable()
-export class MapService {
+export class ESRIMapService {
   map: Map;
   constructor() {
     this.map = new Map({

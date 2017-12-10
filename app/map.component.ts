@@ -1,22 +1,22 @@
 import { Component, ElementRef, Output, EventEmitter } from '@angular/core';
-import { MapService } from './map.service';
+import { ESRIMapService } from './esrimap.service';
 
 import MapView = require('esri/views/MapView');
 import Point = require('esri/geometry/Point');
 import SpatialReference = require('esri/geometry/SpatialReference');
 
 @Component({
-  selector: 'esri-map',
+  selector: 'maplinkr-map',
   template: '<div id="viewDiv" style="height:100%"><ng-content></ng-content></div>'
 })
-export class MapComponent {
+export class EsriMapComponent {
 
   @Output()
   viewCreated = new EventEmitter();
 
   mapView: MapView;
 
-  constructor(private mapService: MapService,
+  constructor(private mapService: ESRIMapService,
     private elementRef: ElementRef) { }
 
   ngOnInit() {
