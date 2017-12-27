@@ -6,13 +6,15 @@
   <link rel="stylesheet" href="//js.arcgis.com/4.5/esri/css/main.css">
   <link rel="stylesheet" href="styles/main.css">
   <script src="//js.arcgis.com/4.5/" data-dojo-config="async: true"></script>
+  <!-- <script src="app/main.ts"></script> -->
 
 </head>
 
 <body>
   <div class="container-fluid">
-    <ng2-maplinkr>Loading...</ng2-maplinkr>
+    <canvas-holder>Loading...</canvas-holder>
   </div>
+
   <script type="text/javascript">
     require([
       "./dist/polyfills.bundle.js",
@@ -20,6 +22,7 @@
       "./dist/main.bundle.js"],
       function (polyfills, vendor, main) { });
   </script>
+
 </body>
 
 </html>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ng2-maplinkr',
-  template: require('./app.component.html')
+  selector: 'canvas-holder',
+  template: require('./CanvasHolder/canvasholder.component.html')
 })
 export class AppComponent implements OnInit {
   constructor() {

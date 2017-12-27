@@ -6,7 +6,11 @@ import { AppComponent } from './app.component';
 import { EsriMapComponent } from './esrimap.component';
 import { ESRIMapService } from './esrimap.service';
 
+import { CanvasHolderComponent } from './CanvasHolder/canvasholder.component';
 import { CoordinateComponent } from './coordinate/coordinate.component';
+import { CarouselComponent } from './Carousel/carousel.component';
+import { MapInstanceService } from './services/MapInstanceService';
+import { CanvasService } from './services/CanvasService';
 
 @NgModule({
   imports: [
@@ -16,13 +20,17 @@ import { CoordinateComponent } from './coordinate/coordinate.component';
   declarations: [
     AppComponent,
     EsriMapComponent,
+    CanvasHolderComponent,
+    CarouselComponent,
     CoordinateComponent
   ],
   bootstrap: [
     AppComponent
   ],
   providers: [
-    ESRIMapService
+    ESRIMapService,
+    CanvasService,
+    MapInstanceService
   ]
 })
 export class AppModule {

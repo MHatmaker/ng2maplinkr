@@ -39,6 +39,7 @@
     "@types/node": "7.0.5",
     "canonical-path": "0.0.2",
     "css-loader": "0.28.7",
+    "file-loader": "^1.1.6",
     "html-loader": "0.5.1",
     "jasmine-core": "2.8.0",
     "json-loader": "0.5.7",

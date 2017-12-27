@@ -38,6 +38,9 @@ module.exports = function (config) {
         watched: false
       }
     ],
+    mime: {
+      'text/x-typescript': ['ts','tsx']
+    },
 
     preprocessors: {
       './karma-test-shim.js': ['webpack', 'sourcemap']
