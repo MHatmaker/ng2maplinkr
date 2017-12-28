@@ -13,20 +13,22 @@ export class CarouselComponent {
     private items : Array<any>;
     private activeSlideNumber = 0;
     private nextSlideNumber = 0;
-    private currentSlide = this.items[0];
+    private currentSlide : any;
     private MapNo = 0;
     private MapName = "";
     private mapInstanceService = null;
     // scope template variables
     private mapcolheight = 510;
     private mapcolWidth = window.innerWidth;
-    private slidesCount = this.items.length;
+    private slidesCount = 0;;
     private showNavButtons = false;
     private showMapText = false;
     private ActNoAct = 'active';
 
     constructor(mapInstanceService: MapInstanceService) {
+        console.log("Carousel ctor");
         // this.mapInstanceService = mapInstanceService;
+        // this.currentSlide = this.items[0] || null;
     }
 
     // navigate through the carousel

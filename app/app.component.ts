@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'canvas-holder',
-  template: require('./CanvasHolder/canvasholder.component.html')
+  selector: 'app-root',
+  template: require('./app.component.html')
 })
 export class AppComponent implements OnInit {
   constructor() {
@@ -10,6 +10,9 @@ export class AppComponent implements OnInit {
   }
   ngOnInit() {
 
+  }
+  addCanvas() {
+      console.log("addCanvas in app.component.ts");
   }
 
   onViewCreated() {
