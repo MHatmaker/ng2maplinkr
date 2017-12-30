@@ -12,6 +12,7 @@ export class MapInstanceService {
         this.isFirstInstance = true;
         this.slideCount = 0;
         this.currentSlideNumber = 0;
+        this.configInstances = {};
     }
 
     getSlideCount() {

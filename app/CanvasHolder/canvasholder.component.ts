@@ -7,7 +7,7 @@ import {CanvasService} from '../services/CanvasService';
 
 @Component({
   selector: 'canvas-holder',
-  providers: [MapInstanceService],
+  providers: [MapInstanceService, CanvasService, MLConfig],
   template: require('./canvasholder.component.html'),
   styles: [require('./canvasholder.component.css')]
 })
@@ -33,6 +33,7 @@ export class CanvasHolderComponent {
             if (this.mapInstanceService.hasConfigInstanceForMap(currIndex) === false) {
                 mlConfig = new MLConfig(currIndex);
                 console.log("addCanvas with index " + currIndex);
+                console.debug(mlConfig);
                 mlConfig.setPosition(this.mapInstanceService.getConfigInstanceForMap(currIndex === 0 ? currIndex : currIndex - 1).getPosition());
                 this.mapInstanceService.setConfigInstanceForMap(currIndex, mlConfig); //angular.copy(mlConfig));
             }

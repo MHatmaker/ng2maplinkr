@@ -11,6 +11,7 @@ import { CoordinateComponent } from './coordinate/coordinate.component';
 import { CarouselComponent } from './Carousel/carousel.component';
 import { MapInstanceService } from './services/MapInstanceService';
 import { CanvasService } from './services/CanvasService';
+import { MLConfig } from './libs/MLConfig';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { CanvasService } from './services/CanvasService';
   providers: [
     ESRIMapService,
     CanvasService,
-    MapInstanceService
+    MapInstanceService,
+    MLConfig
   ]
 })
 export class AppModule {
