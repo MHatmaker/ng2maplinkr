@@ -5,6 +5,8 @@ import {CarouselComponent} from '../Carousel/carousel.component';
 import {MultiCanvas} from '../MultiCanvas/multicanvas.component';
 import {CanvasService} from '../services/CanvasService';
 
+declare var google;
+
 @Component({
   selector: 'canvas-holder',
   providers: [MapInstanceService, CanvasService, MLConfig],
@@ -13,9 +15,19 @@ import {CanvasService} from '../services/CanvasService';
 })
 export class CanvasHolderComponent {
     private isInstantiated : boolean;
+    private outerMapNumber : number = 0;
 
     constructor (private mapInstanceService : MapInstanceService, private canvasService :CanvasService) {
-        this.mapInstanceService = mapInstanceService;
+        var
+            mapLocOptions = {
+                center: new google.maps.LatLng(37.422858, -122.085065),
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            },
+            mlconfig = new MLConfig(this.outerMapNumber);
+        mlconfig.setMapType('google');
+        mlconfig.setPosition({'lon' : 37.422858, "lat" : -122.085065, "zoom" : 15});
+        this.mapInstanceService.setConfigInstanceForMap(this.outerMapNumber, mlconfig);
     }
 
     addCanvas (mapType, mlcfg, resolve) {

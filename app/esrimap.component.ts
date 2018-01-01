@@ -6,7 +6,7 @@ import Point = require('esri/geometry/Point');
 import SpatialReference = require('esri/geometry/SpatialReference');
 
 @Component({
-  selector: 'maplinkr-map',
+  selector: 'maplinkr-esrimap',
   template: '<div id="viewDiv" style="height:100%"><ng-content></ng-content></div>'
 })
 export class EsriMapComponent {

@@ -1,14 +1,16 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { EsriMapComponent } from './esrimap.component';
-import { ESRIMapService } from './esrimap.service';
+import { ESRIMapService } from './services/esrimap.service';
+import { MultiCanvas } from './MultiCanvas/multicanvas.component';
 
 import { CanvasHolderComponent } from './CanvasHolder/canvasholder.component';
 import { CoordinateComponent } from './coordinate/coordinate.component';
 import { CarouselComponent } from './Carousel/carousel.component';
+import { DomService } from './services/dom.service';
 import { MapInstanceService } from './services/MapInstanceService';
 import { CanvasService } from './services/CanvasService';
 import { MLConfig } from './libs/MLConfig';
@@ -21,18 +23,22 @@ import { MLConfig } from './libs/MLConfig';
   declarations: [
     AppComponent,
     EsriMapComponent,
+    MultiCanvas,
     CanvasHolderComponent,
     CarouselComponent,
     CoordinateComponent
   ],
-  bootstrap: [
-    AppComponent
+  entryComponents : [
+    MultiCanvas
   ],
   providers: [
     ESRIMapService,
     CanvasService,
     MapInstanceService,
     MLConfig
+  ],
+  bootstrap: [
+    AppComponent
   ]
 })
 export class AppModule {

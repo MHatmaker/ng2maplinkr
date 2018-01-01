@@ -11,9 +11,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
   }
-  addCanvas() {
-      console.log("addCanvas in app.component.ts");
-  }
 
   onViewCreated() {
     console.log('view created');
