@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { EsriMapComponent } from './esrimap.component';
+import { EsriMapComponent } from './EsriMap/esrimap.component';
 import { ESRIMapService } from './services/esrimap.service';
 import { MultiCanvas } from './MultiCanvas/multicanvas.component';
 
@@ -29,7 +29,8 @@ import { MLConfig } from './libs/MLConfig';
     CoordinateComponent
   ],
   entryComponents : [
-    MultiCanvas
+    MultiCanvas,
+    EsriMapComponent
   ],
   providers: [
     ESRIMapService,

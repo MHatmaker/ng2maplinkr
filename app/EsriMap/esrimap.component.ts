@@ -1,5 +1,5 @@
 import { Component, ElementRef, Output, EventEmitter } from '@angular/core';
-import { ESRIMapService } from './esrimap.service';
+import { ESRIMapService } from '../services/esrimap.service';
 
 import MapView = require('esri/views/MapView');
 import Point = require('esri/geometry/Point');
