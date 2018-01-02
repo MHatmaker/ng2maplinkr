@@ -12,6 +12,7 @@ import {MultiCanvas} from '../MultiCanvas/multicanvas.component';
 @Injectable()
 export class CanvasService {
     private ndx : number;
+    private canvases : Array<MultiCanvas> = new Array<MultiCanvas>();
 
     constructor (
         private componentFactoryResolver: ComponentFactoryResolver,
@@ -25,6 +26,7 @@ export class CanvasService {
     }
     appendNewCanvasToContainer(component : any, ndx : number) {
         this.ndx = ndx;
+        this.canvases.push(component);
         var mapParent = document.getElementsByClassName('MapContainer')[0];
         // Create a component reference from the component
         const componentRef = this.componentFactoryResolver
@@ -42,32 +44,18 @@ export class CanvasService {
         mapParent.appendChild(domElem);
     }
     /*
-        function initService() {
-            var
-                app = angular.module('mapModule');
-            console.log("ready to create CanvasService");
-            app.service('CanvasService', [
-                function () {
-                    var canvases = [];
+    makeCanvasSlideListItem (ndx) {
+        var newCanvasItem = document.createElement('li');
+        newCanvasItem.id = "slide" + ndx;
+        return newCanvasItem;
+    }
+    loadCanvasSlideListItem (elem, ndx) {
+        this.canvases.push(new MultiCanvas.Canvas(elem, ndx));
+        this.canvases[this.canvases.length - 1].init();
+    }
+    */
+    getCanvasSlideListItem (ndx) {
+        return this.canvases[ndx];
+    };
 
-                    console.log("CanvasService to return canvas");
-
-                    this.makeCanvasSlideListItem = function (ndx) {
-                        var newCanvasItem = document.createElement('li');
-                        newCanvasItem.id = "slide" + ndx;
-                        return newCanvasItem;
-                    };
-                    this.loadCanvasSlideListItem = function (elem, ndx) {
-                        canvases.push(new MultiCanvas.Canvas(elem, ndx));
-                        canvases[canvases.length - 1].init();
-                    };
-
-                    this.getCanvasSlideListItem = function (ndx) {
-                        return canvases[ndx];
-                    };
-
-                }
-            ]);
-        }
-        */
 }

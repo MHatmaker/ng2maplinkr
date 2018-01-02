@@ -4,12 +4,13 @@ import { MapInstanceService} from '../services/MapInstanceService';
 import {CarouselComponent} from '../Carousel/carousel.component';
 import {MultiCanvas} from '../MultiCanvas/multicanvas.component';
 import {CanvasService} from '../services/CanvasService';
+import { MessageService } from '../services/messageindex.service';
 
 declare var google;
 
 @Component({
   selector: 'canvas-holder',
-  providers: [MapInstanceService, CanvasService, MLConfig],
+  providers: [MapInstanceService, CanvasService, MLConfig, MessageService],
   template: require('./canvasholder.component.html'),
   styles: [require('./canvasholder.component.css')]
 })
@@ -17,7 +18,8 @@ export class CanvasHolderComponent {
     private isInstantiated : boolean;
     private outerMapNumber : number = 0;
 
-    constructor (private mapInstanceService : MapInstanceService, private canvasService :CanvasService) {
+    constructor (private mapInstanceService : MapInstanceService, private canvasService :CanvasService,
+        private messageService : MessageService) {
         var
             mapLocOptions = {
                 center: new google.maps.LatLng(37.422858, -122.085065),
@@ -29,6 +31,10 @@ export class CanvasHolderComponent {
         mlconfig.setPosition({'lon' : 37.422858, "lat" : -122.085065, "zoom" : 15});
         this.mapInstanceService.setConfigInstanceForMap(this.outerMapNumber, mlconfig);
     }
+    sendMessage(): void {
+            // send message to subscribers via observable subject
+            this.messageService.sendMessage('Message from Home Component to App Component!');
+        }
 
     addCanvas (mapType, mlcfg, resolve) {
         console.log("in CanvasHolderCtrl.addCanvas");
@@ -50,8 +56,9 @@ export class CanvasHolderComponent {
                 this.mapInstanceService.setConfigInstanceForMap(currIndex, mlConfig); //angular.copy(mlConfig));
             }
         }
-        this.canvasService.appendNewCanvasToContainer(MultiCanvas,currIndex);
+        this.canvasService.appendNewCanvasToContainer(MultiCanvas, currIndex);
         this.mapInstanceService.incrementMapNumber();
+        this.sendMessage();
     }
 }
 

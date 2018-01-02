@@ -14,6 +14,7 @@ import { DomService } from './services/dom.service';
 import { MapInstanceService } from './services/MapInstanceService';
 import { CanvasService } from './services/CanvasService';
 import { MLConfig } from './libs/MLConfig';
+import { MessageService } from './services/messageindex.service'
 
 @NgModule({
   imports: [

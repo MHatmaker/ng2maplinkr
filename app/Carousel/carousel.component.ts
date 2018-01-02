@@ -1,10 +1,12 @@
 
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { MapInstanceService } from '../services/MapInstanceService';
+import { Subscription } from 'rxjs/Subscription';
+import { MessageService } from '../services/messageindex.service';
 
 @Component({
   selector: 'carousel',
-  providers: [MapInstanceService],
+  providers: [MapInstanceService, MessageService],
   template: require('./carousel.component.html')
   // styles: [require('./carousel.component.css')]
 })
@@ -25,10 +27,16 @@ export class CarouselComponent {
     private showMapText = false;
     private ActNoAct = 'active';
 
-    constructor(mapInstanceService: MapInstanceService) {
+    private message: any;
+    private subscription: Subscription;
+
+    constructor(mapInstanceService: MapInstanceService, private messageService: MessageService) {
         console.log("Carousel ctor");
         // this.mapInstanceService = mapInstanceService;
         // this.currentSlide = this.items[0] || null;
+
+        // subscribe to home component messages
+        this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message; console.log('got message'); })
     }
 
     // navigate through the carousel
