@@ -4,26 +4,27 @@ import { MapInstanceService} from '../services/MapInstanceService';
 import { CarouselComponent} from '../Carousel/carousel.component';
 import { MultiCanvas } from '../MultiCanvas/multicanvas.component';
 import { CanvasService } from '../services/CanvasService';
-import { MessageService } from '../services/messageindex.service';
-import { BroadcastBase } from '../services/broadcastbase.service';
-import { Broadcaster } from '../services/broadcaster.service';
+// import { MessageService } from '../services/messageindex.service';
+// import { BroadcastBase } from '../services/broadcastbase.service';
+// import { Broadcaster } from '../services/broadcaster.service';
+import { SlideShareService } from '../services/slideshare.service';
 
 declare var google;
 
 @Component({
   selector: 'canvas-holder',
-  providers: [MapInstanceService, CanvasService, MLConfig, MessageService],
+  providers: [MapInstanceService, CanvasService, MLConfig, SlideShareService],
   template: require('./canvasholder.component.html'),
   styles: [require('./canvasholder.component.css')]
 })
-export class CanvasHolderComponent extends BroadcastBase{
+export class CanvasHolderComponent {
     private isInstantiated : boolean;
     private outerMapNumber : number = 0;
     // private broadcaster : Broadcaster;
 
     constructor (private mapInstanceService : MapInstanceService, private canvasService : CanvasService,
-        private messageService : MessageService, private broadcaster : Broadcaster) {
-        super(broadcaster);
+        private slideshareService : SlideShareService) {
+        // super(broadcaster);
         var
             mapLocOptions = {
                 center: new google.maps.LatLng(37.422858, -122.085065),
@@ -38,7 +39,7 @@ export class CanvasHolderComponent extends BroadcastBase{
     sendMessage(): void {
             // send message to subscribers via observable subject
             console.log("Message from CanvasHolderComponent to CarouselComponent!");
-            this.messageService.sendMessage('Message from CanvasHolderComponent to CarouselComponent!');
+            // this.messageService.sendMessage('Message from CanvasHolderComponent to CarouselComponent!');
         }
 
     addCanvas (mapType, mlcfg, resolve) {
@@ -64,11 +65,12 @@ export class CanvasHolderComponent extends BroadcastBase{
         }
         appendedElem = this.canvasService.appendNewCanvasToContainer(MultiCanvas, currIndex);
         this.mapInstanceService.incrementMapNumber();
-        this.broadcaster.broadcast('addslide', {
+        // this.broadcaster.broadcast('addslide', {
+        this.slideshareService.slideData.emit({
                     mapListItem: appendedElem,
                     slideNumber: currIndex,
                     mapName: "Map " + currIndex
-                }, );
+                });
         // this.sendMessage();
         // clickHandler.onaddslide();
     }

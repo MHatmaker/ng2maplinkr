@@ -2,5 +2,5 @@ import { Injectable, EventEmitter } from '@angular/core';;
 
 @Injectable()
 export class SlideShareService {
-    cartData = new EventEmitter<any>();
+    slideData = new EventEmitter<any>();
 }

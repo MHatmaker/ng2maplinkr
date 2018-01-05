@@ -1,4 +1,4 @@
-<li id="slide"{{ndx}}>
+<li id="slide{{''+ndx}}" [ngClass]="slideClass">
     <div (mousedown)="onMouseDown($event)">
         <maplinkr-esrimap></maplinkr-esrimap>
         <!-- <maplinkr-esrimap #esriMap (viewCreated)="onViewCreated()"></maplinkr-esrimap> -->

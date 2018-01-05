@@ -14,8 +14,9 @@ import { DomService } from './services/dom.service';
 import { MapInstanceService } from './services/MapInstanceService';
 import { CanvasService } from './services/CanvasService';
 import { MLConfig } from './libs/MLConfig';
-import { MessageService } from './services/messageindex.service';
-import { Broadcaster } from './services/broadcaster.service';
+// import { MessageService } from './services/messageindex.service';
+// import { Broadcaster } from './services/broadcaster.service';
+import { SlideShareService } from './services/slideshare.service';
 
 @NgModule({
   imports: [
@@ -39,8 +40,9 @@ import { Broadcaster } from './services/broadcaster.service';
     CanvasService,
     MapInstanceService,
     MLConfig,
-    MessageService,
-    Broadcaster
+    // MessageService,
+    // Broadcaster,
+    SlideShareService
   ],
   bootstrap: [
     AppComponent

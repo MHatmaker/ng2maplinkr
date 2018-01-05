@@ -2,17 +2,18 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { MapInstanceService } from '../services/MapInstanceService';
 import { Subscription } from 'rxjs/Subscription';
-import { MessageService } from '../services/messageindex.service';
-import { BroadcastBase } from '../services/broadcastbase.service';
-import { Broadcaster } from '../services/broadcaster.service';
+// import { MessageService } from '../services/messageindex.service';
+// import { BroadcastBase } from '../services/broadcastbase.service';
+// import { Broadcaster } from '../services/broadcaster.service';
+import { SlideShareService } from '../services/slideshare.service';
 
 @Component({
   selector: 'carousel',
-  providers: [MapInstanceService, MessageService],
+  providers: [MapInstanceService], //, MessageService],
   template: require('./carousel.component.html')
   // styles: [require('./carousel.component.css')]
 })
-export class CarouselComponent extends BroadcastBase { //implements OnInit  {
+export class CarouselComponent { // extends BroadcastBase { //implements OnInit  {
     //console.log("Carousel : ready to set up Carousel");
     private items : Array<any> = new Array<any>();
     private activeSlideNumber = 0;
@@ -32,12 +33,17 @@ export class CarouselComponent extends BroadcastBase { //implements OnInit  {
     private message: any;
     private subscription: Subscription;
 
-    constructor(mapInstanceService: MapInstanceService, private messageService: MessageService,
-        private broadcaster : Broadcaster) {
-        super(broadcaster);
+    constructor(mapInstanceService: MapInstanceService, private slideshareService : SlideShareService) {
+        // super(broadcaster);
         console.log("Carousel ctor");
         // this.mapInstanceService = mapInstanceService;
         // this.currentSlide = this.items[0] || null;
+        this.slideshareService.slideData.subscribe(
+          (data: any) => {
+            console.log(data);
+            this.onaddslide(data);
+            // this.myData = data;
+          });
     }
     /*
     ngOnInit() {
@@ -49,7 +55,11 @@ export class CarouselComponent extends BroadcastBase { //implements OnInit  {
     private logMessage(msg) {
         console.log(msg);
     }
-
+    onUpdate(event) {
+        // this.counter = event.value;
+        console.log("onUpdate in CarouselComponent");
+        console.debug(event);
+      }
     // navigate through the carousel
     private navigate(direction : number) {
         // hide the old currentSlide list item
@@ -69,7 +79,7 @@ export class CarouselComponent extends BroadcastBase { //implements OnInit  {
         this.mapInstanceService.setCurrentSlide(this.items[this.activeSlideNumber].slideNumber);
     }
 
-    onaddslide (event, slideData) {
+    onaddslide (slideData) {
         console.log("CarouselCtrl on addslide to array with length " + this.items.length);
         console.debug(slideData);
         if (this.items.length > 0) {

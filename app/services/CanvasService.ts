@@ -12,7 +12,7 @@ import {MultiCanvas} from '../MultiCanvas/multicanvas.component';
 @Injectable()
 export class CanvasService {
     private ndx : number;
-    private canvases : Array<MultiCanvas> = new Array<MultiCanvas>();
+    private canvases : Array<MultiCanvas> = new Array<MultiCanvas >();
 
     constructor (
         private componentFactoryResolver: ComponentFactoryResolver,
@@ -42,6 +42,7 @@ export class CanvasService {
 
         // Append DOM element to the body
         mapParent.appendChild(domElem);
+        return domElem;
     }
     /*
     makeCanvasSlideListItem (ndx) {
