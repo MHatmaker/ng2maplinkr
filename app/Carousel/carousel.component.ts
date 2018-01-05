@@ -3,6 +3,8 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { MapInstanceService } from '../services/MapInstanceService';
 import { Subscription } from 'rxjs/Subscription';
 import { MessageService } from '../services/messageindex.service';
+import { BroadcastBase } from '../services/broadcastbase.service';
+import { Broadcaster } from '../services/broadcaster.service';
 
 @Component({
   selector: 'carousel',
@@ -10,9 +12,9 @@ import { MessageService } from '../services/messageindex.service';
   template: require('./carousel.component.html')
   // styles: [require('./carousel.component.css')]
 })
-export class CarouselComponent {
+export class CarouselComponent extends BroadcastBase { //implements OnInit  {
     //console.log("Carousel : ready to set up Carousel");
-    private items : Array<any>;
+    private items : Array<any> = new Array<any>();
     private activeSlideNumber = 0;
     private nextSlideNumber = 0;
     private currentSlide : any;
@@ -30,13 +32,22 @@ export class CarouselComponent {
     private message: any;
     private subscription: Subscription;
 
-    constructor(mapInstanceService: MapInstanceService, private messageService: MessageService) {
+    constructor(mapInstanceService: MapInstanceService, private messageService: MessageService,
+        private broadcaster : Broadcaster) {
+        super(broadcaster);
         console.log("Carousel ctor");
         // this.mapInstanceService = mapInstanceService;
         // this.currentSlide = this.items[0] || null;
-
+    }
+    /*
+    ngOnInit() {
         // subscribe to home component messages
-        this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message; console.log('got message'); })
+        this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message; this.logMessage(message); })
+    }
+    */
+
+    private logMessage(msg) {
+        console.log(msg);
     }
 
     // navigate through the carousel

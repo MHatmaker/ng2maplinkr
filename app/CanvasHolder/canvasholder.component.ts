@@ -1,10 +1,12 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter } from '@angular/core';
 import { MLConfig } from '../libs/MLConfig';
 import { MapInstanceService} from '../services/MapInstanceService';
-import {CarouselComponent} from '../Carousel/carousel.component';
-import {MultiCanvas} from '../MultiCanvas/multicanvas.component';
-import {CanvasService} from '../services/CanvasService';
+import { CarouselComponent} from '../Carousel/carousel.component';
+import { MultiCanvas } from '../MultiCanvas/multicanvas.component';
+import { CanvasService } from '../services/CanvasService';
 import { MessageService } from '../services/messageindex.service';
+import { BroadcastBase } from '../services/broadcastbase.service';
+import { Broadcaster } from '../services/broadcaster.service';
 
 declare var google;
 
@@ -14,12 +16,14 @@ declare var google;
   template: require('./canvasholder.component.html'),
   styles: [require('./canvasholder.component.css')]
 })
-export class CanvasHolderComponent {
+export class CanvasHolderComponent extends BroadcastBase{
     private isInstantiated : boolean;
     private outerMapNumber : number = 0;
+    // private broadcaster : Broadcaster;
 
-    constructor (private mapInstanceService : MapInstanceService, private canvasService :CanvasService,
-        private messageService : MessageService) {
+    constructor (private mapInstanceService : MapInstanceService, private canvasService : CanvasService,
+        private messageService : MessageService, private broadcaster : Broadcaster) {
+        super(broadcaster);
         var
             mapLocOptions = {
                 center: new google.maps.LatLng(37.422858, -122.085065),
@@ -33,7 +37,8 @@ export class CanvasHolderComponent {
     }
     sendMessage(): void {
             // send message to subscribers via observable subject
-            this.messageService.sendMessage('Message from Home Component to App Component!');
+            console.log("Message from CanvasHolderComponent to CarouselComponent!");
+            this.messageService.sendMessage('Message from CanvasHolderComponent to CarouselComponent!');
         }
 
     addCanvas (mapType, mlcfg, resolve) {
@@ -44,6 +49,7 @@ export class CanvasHolderComponent {
             mapDctv,
             parentDiv,
             // $timeout = timeout,
+            appendedElem,
             mlConfig;
         if (mlcfg) {
             mlConfig = mlcfg;
@@ -56,9 +62,15 @@ export class CanvasHolderComponent {
                 this.mapInstanceService.setConfigInstanceForMap(currIndex, mlConfig); //angular.copy(mlConfig));
             }
         }
-        this.canvasService.appendNewCanvasToContainer(MultiCanvas, currIndex);
+        appendedElem = this.canvasService.appendNewCanvasToContainer(MultiCanvas, currIndex);
         this.mapInstanceService.incrementMapNumber();
-        this.sendMessage();
+        this.broadcaster.broadcast('addslide', {
+                    mapListItem: appendedElem,
+                    slideNumber: currIndex,
+                    mapName: "Map " + currIndex
+                }, );
+        // this.sendMessage();
+        // clickHandler.onaddslide();
     }
 }
 

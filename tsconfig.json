@@ -9,7 +9,8 @@
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": false,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "noStrictGenericChecks": true
   },
   "exclude": [
     "node_modules",

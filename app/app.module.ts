@@ -14,7 +14,8 @@ import { DomService } from './services/dom.service';
 import { MapInstanceService } from './services/MapInstanceService';
 import { CanvasService } from './services/CanvasService';
 import { MLConfig } from './libs/MLConfig';
-import { MessageService } from './services/messageindex.service'
+import { MessageService } from './services/messageindex.service';
+import { Broadcaster } from './services/broadcaster.service';
 
 @NgModule({
   imports: [
@@ -37,7 +38,9 @@ import { MessageService } from './services/messageindex.service'
     ESRIMapService,
     CanvasService,
     MapInstanceService,
-    MLConfig
+    MLConfig,
+    MessageService,
+    Broadcaster
   ],
   bootstrap: [
     AppComponent
