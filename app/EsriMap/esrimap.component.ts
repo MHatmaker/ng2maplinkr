@@ -3,6 +3,7 @@ import { ESRIMapService } from '../services/esrimap.service';
 
 import MapView = require('esri/views/MapView');
 import Point = require('esri/geometry/Point');
+// import esridom = require("esri/domUtils");
 import SpatialReference = require('esri/geometry/SpatialReference');
 
 @Component({
@@ -18,6 +19,16 @@ export class EsriMapComponent {
 
   constructor(private mapService: ESRIMapService,
     private elementRef: ElementRef) { }
+
+  showLoading() {
+      console.log("show loading");
+      // this.mapService.show(loading);
+  }
+
+  hideLoading(error) {
+      console.log("hide loading");
+      // esri.hide(loading);
+  }
 
   ngOnInit() {
     this.mapView = new MapView({
