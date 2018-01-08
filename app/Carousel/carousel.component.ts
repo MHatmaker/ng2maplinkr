@@ -21,7 +21,6 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
     private currentSlide : any;
     private MapNo = 0;
     private MapName = "";
-    private mapInstanceService = null;
     // scope template variables
     private mapcolheight = 510;
     private mapcolWidth = window.innerWidth;
@@ -29,11 +28,9 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
     private showNavButtons = false;
     private showMapText = false;
     private ActNoAct = 'active';
-
-    private message: any;
     private subscription: Subscription;
 
-    constructor(mapInstanceService: MapInstanceService, private slideshareService : SlideShareService) {
+    constructor(private mapInstanceService: MapInstanceService, private slideshareService : SlideShareService) {
         // super(broadcaster);
         console.log("Carousel ctor");
         // this.mapInstanceService = mapInstanceService;
@@ -47,10 +44,10 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
     }
     /*
     ngOnInit() {
+        self = this;
         // subscribe to home component messages
-        this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message; this.logMessage(message); })
-    }
-    */
+        //this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message; this.logMessage(message); })
+    }*/
 
     private logMessage(msg) {
         console.log(msg);
@@ -64,6 +61,7 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
     private navigate(direction : number) {
         // hide the old currentSlide list item
         this.currentSlide.classList.remove('current');
+        // this.currentSlide.removeClass();
 
         console.log("change activeSlideNumber from " +this. activeSlideNumber);
         // calculate the new position
@@ -76,21 +74,27 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
         this.MapNo = this.activeSlideNumber;
         this.MapName = this.items[this.activeSlideNumber].mapName;
         this.currentSlide.classList.add('current');
+        // this.currentSlide.addClass();
         this.mapInstanceService.setCurrentSlide(this.items[this.activeSlideNumber].slideNumber);
     }
 
     onaddslide (slideData) {
         console.log("CarouselCtrl on addslide to array with length " + this.items.length);
         console.debug(slideData);
+        var multican;
         if (this.items.length > 0) {
             this.currentSlide.classList.remove('current');
+            // this.currentSlide.removeClass();
         }
         this.items.push(slideData);
         this.currentSlide = this.items[this.items.length - 1].mapListItem;
         this.activeSlideNumber = this.MapNo = this.items.length - 1;
         this.nextSlideNumber += 1;
         this.MapName = slideData.mapName;
-        this.currentSlide.classList.add('current');
+        multican = this.items[this.items.length - 1];
+        // this.currentSlide.classList.add('current');
+        multican.mapListItem.classList.add('current');
+
         this.slidesCount = this.items.length;
         this.showNavButtons =this.slidesCount  > 1;
         this.showMapText = this.slidesCount > 0;

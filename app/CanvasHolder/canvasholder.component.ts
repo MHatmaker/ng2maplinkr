@@ -1,4 +1,15 @@
-import { Component, OnInit, OnDestroy, Input, EventEmitter } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    OnDestroy,
+    Input,
+    EventEmitter } from '@angular/core';
+    // ViewContainerRef,
+    // ComponentRef,
+    // ReflectiveInjector,
+    // ViewChild,
+    // ElementRef,
+    // ComponentFactoryResolver } from '@angular/core';
 import { MLConfig } from '../libs/MLConfig';
 import { MapInstanceService} from '../services/MapInstanceService';
 import { CarouselComponent} from '../Carousel/carousel.component';
@@ -22,8 +33,10 @@ export class CanvasHolderComponent {
     private outerMapNumber : number = 0;
     // private broadcaster : Broadcaster;
 
+    // @ViewChild('placeHolder', {read: ViewContainerRef}) private _placeHolder: ViewContainerRef;
+
     constructor (private mapInstanceService : MapInstanceService, private canvasService : CanvasService,
-        private slideshareService : SlideShareService) {
+        private slideshareService : SlideShareService) { //, private _cmpFctryRslvr: ComponentFactoryResolver) {
         // super(broadcaster);
         var
             mapLocOptions = {
@@ -41,7 +54,19 @@ export class CanvasHolderComponent {
             console.log("Message from CanvasHolderComponent to CarouselComponent!");
             // this.messageService.sendMessage('Message from CanvasHolderComponent to CarouselComponent!');
         }
+        /*
+    public createComponent (vCref: ViewContainerRef, type: any): ComponentRef<any> {
 
+        let factory = this._cmpFctryRslvr.resolveComponentFactory(type);
+
+        // vCref is needed cause of that injector..
+        let injector = ReflectiveInjector.fromResolvedProviders([], vCref.parentInjector);
+
+        // create component without adding it directly to the DOM
+        let comp = factory.create(injector);
+
+        return comp;
+    }*/
     addCanvas (mapType, mlcfg, resolve) {
         console.log("in CanvasHolderCtrl.addCanvas");
         var currIndex = this.mapInstanceService.getSlideCount(),
@@ -63,6 +88,8 @@ export class CanvasHolderComponent {
                 this.mapInstanceService.setConfigInstanceForMap(currIndex, mlConfig); //angular.copy(mlConfig));
             }
         }
+        // let cmp = this.createComponent(this._placeHolder, MultiCanvas);
+
         appendedElem = this.canvasService.appendNewCanvasToContainer(MultiCanvas, currIndex);
         this.mapInstanceService.incrementMapNumber();
         // this.broadcaster.broadcast('addslide', {

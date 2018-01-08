@@ -9,3 +9,4 @@ app/**/*.js.map
 typings/
 npm-debug*.log
 gitpass
+styles/ionic/
