@@ -10,8 +10,8 @@ import { SlideShareService } from '../services/slideshare.service';
 @Component({
   selector: 'carousel',
   providers: [MapInstanceService], //, MessageService],
-  template: require('./carousel.component.html')
-  // styles: [require('./carousel.component.css')]
+  template: require('./carousel.component.html'),
+  styles: [require('./carousel.component.css')]
 })
 export class CarouselComponent { // extends BroadcastBase { //implements OnInit  {
     //console.log("Carousel : ready to set up Carousel");
@@ -60,7 +60,7 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
     // navigate through the carousel
     private navigate(direction : number) {
         // hide the old currentSlide list item
-        this.currentSlide.classList.remove('current');
+        this.currentSlide.classList.remove('carousel-current');
         // this.currentSlide.removeClass();
 
         console.log("change activeSlideNumber from " +this. activeSlideNumber);
@@ -73,7 +73,7 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
         this.currentSlide = this.items[this.activeSlideNumber].mapListItem;
         this.MapNo = this.activeSlideNumber;
         this.MapName = this.items[this.activeSlideNumber].mapName;
-        this.currentSlide.classList.add('current');
+        this.currentSlide.classList.add('carousel-current');
         // this.currentSlide.addClass();
         this.mapInstanceService.setCurrentSlide(this.items[this.activeSlideNumber].slideNumber);
     }
@@ -83,7 +83,7 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
         console.debug(slideData);
         var multican;
         if (this.items.length > 0) {
-            this.currentSlide.classList.remove('current');
+            this.currentSlide.classList.remove('carousel-current');
             // this.currentSlide.removeClass();
         }
         this.items.push(slideData);
@@ -92,8 +92,8 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
         this.nextSlideNumber += 1;
         this.MapName = slideData.mapName;
         multican = this.items[this.items.length - 1];
-        // this.currentSlide.classList.add('current');
-        multican.mapListItem.classList.add('current');
+        this.currentSlide.classList.add('carousel-current');
+        // multican.mapListItem.classList.add('current');
 
         this.slidesCount = this.items.length;
         this.showNavButtons =this.slidesCount  > 1;

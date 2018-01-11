@@ -10,6 +10,7 @@ import { CanvasService } from '../services/CanvasService';
 export class MultiCanvas {
     private el = null;
     private ndx : number = null;
+    private mapcolheight = 510;
     private slideClass : Array<any> = new Array<any>();
 
     constructor(private canvasService: CanvasService) {
