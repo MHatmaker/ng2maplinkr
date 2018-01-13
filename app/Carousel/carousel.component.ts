@@ -92,6 +92,7 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
         this.nextSlideNumber += 1;
         this.MapName = slideData.mapName;
         multican = this.items[this.items.length - 1];
+        this.currentSlide.classList.add('carousel-basic');
         this.currentSlide.classList.add('carousel-current');
         // multican.mapListItem.classList.add('current');
 

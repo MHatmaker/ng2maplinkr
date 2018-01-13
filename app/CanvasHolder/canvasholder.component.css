@@ -28,7 +28,6 @@
     }
     .active li {
       position: absolute;
-      top: 500px;
     }
     .active li.current {
       top: 30px;

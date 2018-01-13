@@ -6,8 +6,14 @@
     .carousel-active current {
       top: 30px;
     }
-    .carousel-current {
+    .carousel-basic {
       position: absolute;
-      top: 30px;
+      visibility: hidden;
       width: 100%;
+      top: 500px;
+    }
+    .carousel-current {
+      top: 10px;
+      visibility: visible;
+      left: 5px;
     }
