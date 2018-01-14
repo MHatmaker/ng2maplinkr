@@ -29,7 +29,7 @@
     .active li {
       position: absolute;
     }
-    .active li.current {
+    .active current {
       top: 30px;
     }
     .buttons {
@@ -37,7 +37,7 @@
     }
     .active .buttons {
       display: block;
-      padding: 5px 0;
+      padding: 0 0;
       background: #eee;
       text-align: center;
       z-index: 10;
@@ -45,10 +45,6 @@
     }
     .carouselbox button {
       border: none;
-      visibility: hidden;
-    }
-    .active button {
-      visibility: visible;
     }
     .mapsshowing button {
       visibility: visible;

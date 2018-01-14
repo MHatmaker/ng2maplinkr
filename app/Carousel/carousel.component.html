@@ -4,14 +4,14 @@
         <div class="carouselbox {{ActNoAct}}" style="margin: 0.2em;">
             <div class="buttons icon-row ">
                 <div class="col-md-1 col-xs-1">
-                    <button class="chevron-prev" [class.visible]="showNavButtons" (click)="onClickPrev()">
+                    <button class="chevron-prev" *ngIf="showNavButtons" (click)="onClickPrev()">
                         <span class="offscreen">Previous</span>
                     </button>
                 </div>
-                <div class="col-md-3 col-xs-3" [class.visible]="showMapText">{{MapName}}
+                <div class="col-md-3 col-xs-3" *ngIf="showMapText">{{MapName}}
                 </div>
                 <div class="col-md-1 col-xs-1">
-                    <button class="chevron-next" (click)="onClickNext()" [class.visible]="showNavButtons">
+                    <button class="chevron-next" (click)="onClickNext()" *ngIf="showNavButtons">
                         <span class="offscreen">Next</span>
                     </button>
                 </div>

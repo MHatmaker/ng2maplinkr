@@ -8,15 +8,13 @@ import { CanvasService } from '../services/CanvasService';
 })
 
 export class MultiCanvas {
-    private el = null;
+    private el : string = null;
     private ndx : number = null;
-    private mapcolheight = 510;
-    private slideClass : Array<any> = new Array<any>();
+    private mapcolheight : number = 510;
 
     constructor(private canvasService: CanvasService) {
         console.log("ndx is " + this.canvasService.getIndex());
         this.ndx = this.canvasService.getIndex();
-        this.slideClass = [];
     }
     /*
             Canvas.prototype.init = function () {
@@ -30,21 +28,6 @@ export class MultiCanvas {
             };
       */
 
-    addClass() {
-      this.slideClass.push('current');
-    }
-
-    removeClass() {
-      this.slideClass.pop();
-    }
-
-    checkClass() {
-      if(this.slideClass.indexOf('current') == -1) {
-         alert('false');
-      } else {
-         alert('true');
-      }
-    }
     onMouseDown (event) {
         console.log('onMouseDown: '); //, this.el);
         console.log(event.srcElement);

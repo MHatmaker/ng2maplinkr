@@ -1,34 +1,29 @@
 
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { MapInstanceService } from '../services/MapInstanceService';
-import { Subscription } from 'rxjs/Subscription';
-// import { MessageService } from '../services/messageindex.service';
-// import { BroadcastBase } from '../services/broadcastbase.service';
-// import { Broadcaster } from '../services/broadcaster.service';
 import { SlideShareService } from '../services/slideshare.service';
 
 @Component({
   selector: 'carousel',
-  providers: [MapInstanceService], //, MessageService],
+  providers: [MapInstanceService],
   template: require('./carousel.component.html'),
   styles: [require('./carousel.component.css')]
 })
 export class CarouselComponent { // extends BroadcastBase { //implements OnInit  {
     //console.log("Carousel : ready to set up Carousel");
     private items : Array<any> = new Array<any>();
-    private activeSlideNumber = 0;
-    private nextSlideNumber = 0;
+    private activeSlideNumber : number = 0;
+    private nextSlideNumber : number = 0;
     private currentSlide : any;
-    private MapNo = 0;
-    private MapName = "";
+    private MapNo : number = 0;
+    private MapName : string = "";
     // scope template variables
-    private mapcolheight = 510;
-    private mapcolWidth = window.innerWidth;
-    private slidesCount = 0;;
-    private showNavButtons = false;
-    private showMapText = false;
-    private ActNoAct = 'active';
-    private subscription: Subscription;
+    private mapcolheight : number = 510;
+    private mapcolWidth : number = window.innerWidth;
+    private slidesCount : number = 0;
+    private showNavButtons : boolean = false;
+    private showMapText : boolean = false;
+    private ActNoAct : string = 'active';
 
     constructor(private mapInstanceService: MapInstanceService, private slideshareService : SlideShareService) {
         // super(broadcaster);
@@ -39,21 +34,10 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
           (data: any) => {
             console.log(data);
             this.onaddslide(data);
-            // this.myData = data;
           });
     }
-    /*
-    ngOnInit() {
-        self = this;
-        // subscribe to home component messages
-        //this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message; this.logMessage(message); })
-    }*/
 
-    private logMessage(msg) {
-        console.log(msg);
-    }
     onUpdate(event) {
-        // this.counter = event.value;
         console.log("onUpdate in CarouselComponent");
         console.debug(event);
       }
@@ -61,7 +45,6 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
     private navigate(direction : number) {
         // hide the old currentSlide list item
         this.currentSlide.classList.remove('carousel-current');
-        // this.currentSlide.removeClass();
 
         console.log("change activeSlideNumber from " +this. activeSlideNumber);
         // calculate the new position
@@ -74,7 +57,6 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
         this.MapNo = this.activeSlideNumber;
         this.MapName = this.items[this.activeSlideNumber].mapName;
         this.currentSlide.classList.add('carousel-current');
-        // this.currentSlide.addClass();
         this.mapInstanceService.setCurrentSlide(this.items[this.activeSlideNumber].slideNumber);
     }
 
@@ -84,7 +66,6 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
         var multican;
         if (this.items.length > 0) {
             this.currentSlide.classList.remove('carousel-current');
-            // this.currentSlide.removeClass();
         }
         this.items.push(slideData);
         this.currentSlide = this.items[this.items.length - 1].mapListItem;
@@ -94,10 +75,9 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
         multican = this.items[this.items.length - 1];
         this.currentSlide.classList.add('carousel-basic');
         this.currentSlide.classList.add('carousel-current');
-        // multican.mapListItem.classList.add('current');
 
         this.slidesCount = this.items.length;
-        this.showNavButtons =this.slidesCount  > 1;
+        this.showNavButtons = this.slidesCount  > 1;
         this.showMapText = this.slidesCount > 0;
     }
     onremoveslide () {
@@ -119,11 +99,9 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
     }
     // add event handlers to buttons
     onClickNext () {
-        console.log("next");
         this.navigate(1);
     }
     onClickPrev () {
-        console.log("prev");
         this.navigate(-1);
     }
 
