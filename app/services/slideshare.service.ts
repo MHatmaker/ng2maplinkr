@@ -1,6 +1,8 @@
-import { Injectable, EventEmitter } from '@angular/core';;
+import { Injectable, EventEmitter } from '@angular/core';
+import { SlideData } from "../services/slidedata.interface";
 
 @Injectable()
 export class SlideShareService {
-    slideData = new EventEmitter<any>();
+    slideData = new EventEmitter<SlideData>();
+    slideRemove = new EventEmitter();
 }

@@ -2,6 +2,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { MapInstanceService } from '../services/MapInstanceService';
 import { SlideShareService } from '../services/slideshare.service';
+import { SlideData } from "../services/slidedata.interface";
 
 @Component({
   selector: 'carousel',
@@ -31,9 +32,13 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
         // this.mapInstanceService = mapInstanceService;
         // this.currentSlide = this.items[0] || null;
         this.slideshareService.slideData.subscribe(
-          (data: any) => {
+          (data: SlideData) => {
             console.log(data);
             this.onaddslide(data);
+          });
+        this.slideshareService.slideRemove.subscribe(
+            (val : number) => {console.log("remove a slide");
+            this.onremoveslide();
           });
     }
 
@@ -60,7 +65,7 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
         this.mapInstanceService.setCurrentSlide(this.items[this.activeSlideNumber].slideNumber);
     }
 
-    onaddslide (slideData) {
+    onaddslide (slideData : SlideData) {
         console.log("CarouselCtrl on addslide to array with length " + this.items.length);
         console.debug(slideData);
         var multican;
@@ -80,7 +85,7 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
         this.showNavButtons = this.slidesCount  > 1;
         this.showMapText = this.slidesCount > 0;
     }
-    onremoveslide () {
+    onremoveslide () : number {
         var slideToRemove = this.activeSlideNumber,
               slideElement = document.getElementById('slide' + slideToRemove);
         console.log("remove slide " + this.activeSlideNumber + " from items array with length" + this.items.length);
@@ -94,6 +99,7 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
                 slideElement.remove();
             }
             this.navigate(0);
+            return 0;
         }
 
     }

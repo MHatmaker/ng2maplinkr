@@ -15,6 +15,7 @@ import { MapInstanceService} from '../services/MapInstanceService';
 import { CarouselComponent} from '../Carousel/carousel.component';
 import { MultiCanvas } from '../MultiCanvas/multicanvas.component';
 import { CanvasService } from '../services/CanvasService';
+import { SlideData } from "../services/slidedata.interface";
 // import { MessageService } from '../services/messageindex.service';
 // import { BroadcastBase } from '../services/broadcastbase.service';
 // import { Broadcaster } from '../services/broadcaster.service';
@@ -100,6 +101,12 @@ export class CanvasHolderComponent {
                 });
         // this.sendMessage();
         // clickHandler.onaddslide();
+    }
+    removeCanvas (clickedItem) {
+        console.log("removeCanvas");
+        console.debug(clickedItem);
+        // MapInstanceService.removeInstance(CarouselCtrl.getCurrentSlideNumber());
+        this.slideshareService.slideRemove.emit();
     }
 }
 
