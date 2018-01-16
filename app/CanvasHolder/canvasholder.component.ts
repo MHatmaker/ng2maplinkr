@@ -13,7 +13,8 @@ import {
 import { MLConfig } from '../libs/MLConfig';
 import { MapInstanceService} from '../services/MapInstanceService';
 import { CarouselComponent} from '../Carousel/carousel.component';
-import { MultiCanvas } from '../MultiCanvas/multicanvas.component';
+import { MultiCanvasEsri } from '../MultiCanvas/multicanvasesri.component';
+import { MultiCanvasGoogle } from '../MultiCanvas/multicanvasgoogle.component';
 import { CanvasService } from '../services/CanvasService';
 import { SlideData } from "../services/slidedata.interface";
 // import { MessageService } from '../services/messageindex.service';
@@ -77,6 +78,7 @@ export class CanvasHolderComponent {
             parentDiv,
             // $timeout = timeout,
             appendedElem,
+            mapTypeToCreate,
             mlConfig;
         if (mlcfg) {
             mlConfig = mlcfg;
@@ -90,8 +92,13 @@ export class CanvasHolderComponent {
             }
         }
         // let cmp = this.createComponent(this._placeHolder, MultiCanvas);
+        if (mapType === 'google') {
+            mapTypeToCreate = MultiCanvasGoogle;
+        } else if (mapType === 'esri') {
+            mapTypeToCreate = MultiCanvasEsri;
+        }
 
-        appendedElem = this.canvasService.appendNewCanvasToContainer(MultiCanvas, currIndex);
+        appendedElem = this.canvasService.appendNewCanvasToContainer(mapTypeToCreate, currIndex);
         this.mapInstanceService.incrementMapNumber();
         // this.broadcaster.broadcast('addslide', {
         this.slideshareService.slideData.emit({

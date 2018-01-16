@@ -7,12 +7,12 @@ import {
     ComponentRef
 } from '@angular/core';
 
-import {MultiCanvas} from '../MultiCanvas/multicanvas.component';
+// import {MultiCanvasGoogle} from '../MultiCanvas/multicanvasgoogle.component';
 
 @Injectable()
 export class CanvasService {
     private ndx : number;
-    private canvases : Array<MultiCanvas> = new Array<MultiCanvas >();
+    private canvases : Array<any> = new Array<any>();
 
     constructor (
         private componentFactoryResolver: ComponentFactoryResolver,
