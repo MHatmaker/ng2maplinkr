@@ -1,12 +1,14 @@
 import {
     Injectable,
 } from '@angular/core';
+import { MLPosition, IPosition } from "../services/position.service";
+import { ConfigParams, IConfigParams } from "../services/configparams.service";
 
 @Injectable()
 export class MLConfig {
     private staticMethods = {};
     private details = {
-        mapId : this.ndx,
+        mapId :  -1, //this.ndx,
         userId : "",
         referrerId : "",
         referrerName : "",
@@ -22,9 +24,12 @@ export class MLConfig {
         mapNumber: null,
         mapHoster : null,
         webmapId : "a4bb8a91ecfb4131aa544eddfbc2f1d0",
+        mlposition : null, // = new MLPosition(),
+        /*
         lat : '',
         lon : '',
         zoom : '',
+        */
         nginj : null,
         protocol : 'http',
         host : '', //"http://localhost",
@@ -38,6 +43,7 @@ export class MLConfig {
     constructor (
         private ndx : number
       ){
+          this.details.mlposition = new MLPosition();
     }
 
     getParameterByName (name : string, details? : any) {
@@ -151,25 +157,49 @@ export class MLConfig {
     }
     hasCoordinates () {
         var result = "";
-        result = this.getParameterByName('zoom', this.details);
+        result = this.getParameterByName('zoom', this.details.mlposition);
         return result === "" ? false : true;
     }
     lon () {
-        return this.getParameterByName('lon', this.details);
+        return this.getParameterByName('lon', this.details.mlposition);
     }
     lat () {
-        return this.getParameterByName('lat', this.details);
+        return this.getParameterByName('lat', this.details.mlposition);
     }
     zoom () {
-        return this.getParameterByName('zoom', this.details);
+        return this.getParameterByName('zoom', this.details.mlposition);
     }
-    setPosition (position) {
-        this.details.lon = position.lon;
-        this.details.lat = position.lat;
-        this.details.zoom = position.zoom;
+    setConfigParams (config : IConfigParams) {
+        this.details.mlposition.lon = config.mlposition.lon;
+        this.details.mlposition.lat = config.mlposition.lat;
+        this.details.mlposition.zoom = config.mlposition.zoom;
+        this.details.mapId = config.mapId;
+        this.details.mapType = config.mapType;
+        this.details.webmapId = config.webmapId;
     }
-    getPosition () {
-        return {"webmapId" : this.details.webmapId, "mapType" : this.details.mapType, "lon" : this.details.lon, "lat" : this.details.lat, "zoom" : this.details.zoom};
+    getConfigParams () : IConfigParams {
+        return {
+            "mapId" : this.details.mapId,
+            "webmapId" : this.details.webmapId,
+            "mapType" : this.details.mapType,
+            "mlposition" : {
+                "lon" : this.details.mlposition.lon,
+                "lat" : this.details.mlposition.lat,
+                "zoom" : this.details.mlposition.zoom}
+            }
+    }
+
+    setPosition (position : IPosition) {
+        this.details.mlposition.lon = position.lon;
+        this.details.mlposition.lat = position.lat;
+        this.details.mlposition.zoom = position.zoom;
+    }
+    getPosition () : IPosition {
+        return new MLPosition({
+                "lon" : this.details.mlposition.lon,
+                "lat" : this.details.mlposition.lat,
+                "zoom" : this.details.mlposition.zoom
+            })
     }
 
     setQuery (q) {
@@ -231,9 +261,9 @@ export class MLConfig {
                 "maphost : "  + this.details.maphost + "\n" +
                 "webmapId : "  + this.details.webmapId + "\n" +
                 "masherChannel : "  + this.details.masherChannel + "\n" +
-                "lon :" + this.details.lon + '\n' +
-                "lat : " + this.details.lat + "\n" +
-                "zoom : " + this.details.zoom +
+                "lon :" + this.details.mlposition.lon + '\n' +
+                "lat : " + this.details.mlposition.lat + "\n" +
+                "zoom : " + this.details.mlposition.zoom +
                 "startupView.summaryShowing : " + this.details.startupView.summaryShowing + ", startupView.websiteDisplayMode : " + this.details.startupView.websiteDisplayMode
         );
     }

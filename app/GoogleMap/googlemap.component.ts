@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { MouseEvent } from '@agm/core';
 
 @Component({
@@ -6,7 +6,7 @@ import { MouseEvent } from '@agm/core';
   template: require('./googlemap.component.html'),
   styles: [ require('./googlemap.component.css')]
 })
-export class GoogleMapComponent  {
+export class GoogleMapComponent implements OnInit {
   @Output()
   viewCreated = new EventEmitter();
   private lat: number;
@@ -18,7 +18,7 @@ export class GoogleMapComponent  {
 
   ngOnInit() {
     // google maps zoom level
-    this.zoom = 8;
+    this.zoom = 14;
 
     // initial center position for the map
     this.lat = 41.888941;

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, Output, EventEmitter, OnInit } from '@angular/core';
 import { ESRIMapService } from '../services/esrimap.service';
 
 import MapView = require('esri/views/MapView');
@@ -9,7 +9,7 @@ import SpatialReference = require('esri/geometry/SpatialReference');
   selector: 'maplinkr-esrimap',
   template: '<div id="viewDiv" style="height:100%"><ng-content></ng-content></div>'
 })
-export class EsriMapComponent {
+export class EsriMapComponent implements OnInit {
 
   @Output()
   viewCreated = new EventEmitter();

@@ -2,7 +2,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { MapInstanceService } from '../services/MapInstanceService';
 import { SlideShareService } from '../services/slideshare.service';
-import { SlideData } from "../services/slidedata.interface";
+import { ISlideData } from "../services/slidedata.interface";
 
 @Component({
   selector: 'carousel',
@@ -32,7 +32,7 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
         // this.mapInstanceService = mapInstanceService;
         // this.currentSlide = this.items[0] || null;
         this.slideshareService.slideData.subscribe(
-          (data: SlideData) => {
+          (data: ISlideData) => {
             console.log(data);
             this.onaddslide(data);
           });
@@ -65,7 +65,7 @@ export class CarouselComponent { // extends BroadcastBase { //implements OnInit 
         this.mapInstanceService.setCurrentSlide(this.items[this.activeSlideNumber].slideNumber);
     }
 
-    onaddslide (slideData : SlideData) {
+    onaddslide (slideData : ISlideData) {
         console.log("CarouselCtrl on addslide to array with length " + this.items.length);
         console.debug(slideData);
         var multican;
