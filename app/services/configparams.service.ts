@@ -2,28 +2,35 @@ import { Injectable } from '@angular/core';
 import { MLPosition } from './position.service';
 import { IPosition } from './position.service';
 
+export interface IConfigParams {
+    mapId : number;
+    mapType? : string;
+    webmapId? : string;
+    mlposition? : MLPosition;
+}
+
 @Injectable()
-export class ConfigParams {
-    private mlposition : MLPosition;
+export class ConfigParams implements IConfigParams{
+    // mapId : number;
+    // mapType : string;
+    // webmapId : string;
+    // mlposition : MLPosition;
 
     constructor(
-        private mapId : number  = -1,
-        private mapType : string = 'unknown',
-        private webmapId : string = "unknown",
-        pos? : IPosition) {
-        if (pos) {
-            this.mlposition.lon = pos.lon;
-            this.mlposition.lat = pos.lat;
-            this.mlposition.zoom = pos.zoom;
+        public mapId : number  = -1,
+        public mapType? : string,
+        public webmapId? : string,
+        public mlposition? : IPosition) {
+
+        this.mapId = mapId;
+        this.mapType = mapType;
+        this.webmapId = webmapId;
+        if (mlposition) {
+            this.mlposition.lon = mlposition.lon;
+            this.mlposition.lat = mlposition.lat;
+            this.mlposition.zoom = mlposition.zoom;
         } else {
             this.mlposition.lon = this.mlposition.lat = this.mlposition.zoom = -1;``
         }
     }
 };
-
-export interface IConfigParams {
-    mlposition : MLPosition;
-    mapId : number;
-    mapType : string;
-    webmapId : string;
-}

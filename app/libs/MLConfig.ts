@@ -1,8 +1,8 @@
 import {
     Injectable,
 } from '@angular/core';
-import { MLPosition, IPosition } from "../services/position.service";
-import { ConfigParams, IConfigParams } from "../services/configparams.service";
+import { IPosition, MLPosition } from "../services/position.service";
+import { IConfigParams, ConfigParams } from "../services/configparams.service";
 
 @Injectable()
 export class MLConfig {
@@ -40,10 +40,11 @@ export class MLConfig {
         smallFormDimensions : { 'top' : 1, 'left' : 1, 'width' : 450, 'height' : 570}
     };
 
-    constructor (
-        private ndx : number
-      ){
-          this.details.mlposition = new MLPosition();
+    constructor (cfgparams : IConfigParams) {
+        this.details.mlposition = cfgparams.mlposition;
+        this.details.mapId = cfgparams.mapId;
+        this.details.mapType = cfgparams.mapType;
+        this.details.webmapId = cfgparams.webmapId;
     }
 
     getParameterByName (name : string, details? : any) {
@@ -195,11 +196,12 @@ export class MLConfig {
         this.details.mlposition.zoom = position.zoom;
     }
     getPosition () : IPosition {
-        return new MLPosition({
-                "lon" : this.details.mlposition.lon,
-                "lat" : this.details.mlposition.lat,
-                "zoom" : this.details.mlposition.zoom
-            })
+    //     return new MLPosition({
+    //             "lon" : this.details.mlposition.lon,
+    //             "lat" : this.details.mlposition.lat,
+    //             "zoom" : this.details.mlposition.zoom
+    //         })
+            return new MLPosition(this.details.mlposition.lon, this.details.mlposition.details.lat, this.details.mlposition.details.zoom);
     }
 
     setQuery (q) {

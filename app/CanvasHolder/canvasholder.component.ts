@@ -10,8 +10,9 @@ import {
     // ViewChild,
     // ElementRef,
     // ComponentFactoryResolver } from '@angular/core';
+import { IPosition, MLPosition } from '../services/position.service';
+import { ConfigParams, IConfigParams } from '../services/configparams.service';
 import { MLConfig } from '../libs/MLConfig';
-import { IPosition } from '../services/position.service';
 import { MapInstanceService} from '../services/MapInstanceService';
 import { CarouselComponent} from '../Carousel/carousel.component';
 import { MultiCanvasEsri } from '../MultiCanvas/multicanvasesri.component';
@@ -24,7 +25,7 @@ declare var google;
 
 @Component({
   selector: 'canvas-holder',
-  providers: [MapInstanceService, CanvasService, MLConfig, SlideShareService],
+  providers: [MapInstanceService, CanvasService, MLPosition, ConfigParams, MLConfig, SlideShareService],
   template: require('./canvasholder.component.html'),
   styles: [require('./canvasholder.component.css')]
 })
@@ -44,9 +45,11 @@ export class CanvasHolderComponent {
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             },
         */
-        var mlconfig = new MLConfig(this.outerMapNumber);
-        mlconfig.setMapType('google');
-        mlconfig.setPosition({'lon' : 37.422858, "lat" : -122.085065, "zoom" : 15});
+        console.log("fire up ConfigParams");
+        var cfgparams = new ConfigParams(this.outerMapNumber, 'google', "nowebmap",{'lon' : 37.422858, "lat" : -122.085065, "zoom" : 15}),
+            mlconfig = new MLConfig(cfgparams);
+        // mlconfig.setMapType('google');
+        // mlconfig.setPosition({'lon' : 37.422858, "lat" : -122.085065, "zoom" : 15});
         this.mapInstanceService.setConfigInstanceForMap(this.outerMapNumber, mlconfig);
     }
     sendMessage(): void {
@@ -77,12 +80,15 @@ export class CanvasHolderComponent {
             // $timeout = timeout,
             appendedElem,
             mapTypeToCreate,
+            newpos,
             mlConfig;
         if (mlcfg) {
             mlConfig = mlcfg;
         } else {
             if (this.mapInstanceService.hasConfigInstanceForMap(currIndex) === false) {
-                mlConfig = new MLConfig(currIndex);
+                // newpos = new MLPosition({"lon": -1, "lat": -1, "zoom" : -1});
+                newpos = new MLPosition(-1, -1, -1);
+                mlConfig = new MLConfig(new ConfigParams(currIndex, 'google', "", newpos));
                 console.log("addCanvas with index " + currIndex);
                 console.debug(mlConfig);
                 mlConfig.setConfigParams(this.mapInstanceService.getConfigInstanceForMap(
