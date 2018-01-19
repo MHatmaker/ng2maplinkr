@@ -39,21 +39,12 @@ export class CanvasHolderComponent {
     // @ViewChild('placeHolder', {read: ViewContainerRef}) private _placeHolder: ViewContainerRef;
 
     constructor (private mapInstanceService : MapInstanceService, private canvasService : CanvasService,
-        private slideshareService : SlideShareService) {
-          /*
-        var
-            mapLocOptions = {
-                center: new google.maps.LatLng(37.422858, -122.085065),
-                zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            },
-        */
+            private slideshareService : SlideShareService) {
+
         console.log("fire up ConfigParams");
         var ipos = <IPosition>{'lon' : 37.422858, "lat" : -122.085065, "zoom" : 15},
             cfgparams = <IConfigParams>{mapId : this.outerMapNumber, mapType : 'google', webmapId : "nowebmap", mlposition :ipos},
             mlconfig = new MLConfig(cfgparams);
-        // mlconfig.setMapType('google');
-        // mlconfig.setPosition({'lon' : 37.422858, "lat" : -122.085065, "zoom" : 15});
         this.mapInstanceService.setConfigInstanceForMap(this.outerMapNumber, mlconfig);
     }
     sendMessage(): void {
@@ -77,11 +68,9 @@ export class CanvasHolderComponent {
     addCanvas (mapType, mlcfg, resolve) {
         console.log("in CanvasHolderCtrl.addCanvas");
         var currIndex = this.mapInstanceService.getSlideCount(),
-            // mlConfig = new MLConfig.MLConfig(currIndex),
             newCanvasItem,
             mapDctv,
             parentDiv,
-            // $timeout = timeout,
             appendedElem,
             mapTypeToCreate,
             newpos,
@@ -91,7 +80,6 @@ export class CanvasHolderComponent {
             mlConfig = mlcfg;
         } else {
             if (this.mapInstanceService.hasConfigInstanceForMap(currIndex) === false) {
-                // newpos = new MLPosition({"lon": -1, "lat": -1, "zoom" : -1});
                 newpos = new MLPosition(-1, -1, -1);
                 icfg = <IConfigParams>{mapId : -1, mapType : 'unknown', webmapId : '', mlposition : newpos}
                 mlConfig = new MLConfig(icfg);
