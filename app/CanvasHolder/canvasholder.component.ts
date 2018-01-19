@@ -23,9 +23,12 @@ import { SlideShareService } from '../services/slideshare.service';
 
 declare var google;
 
+console.log("loading CanvasHolder");
+
 @Component({
   selector: 'canvas-holder',
-  providers: [MapInstanceService, CanvasService, MLPosition, ConfigParams, MLConfig, SlideShareService],
+  providers: [MapInstanceService, CanvasService, SlideShareService],
+  // providers: [MapInstanceService, CanvasService, MLPosition, ConfigParams, MLConfig, SlideShareService],
   template: require('./canvasholder.component.html'),
   styles: [require('./canvasholder.component.css')]
 })
@@ -46,7 +49,8 @@ export class CanvasHolderComponent {
             },
         */
         console.log("fire up ConfigParams");
-        var cfgparams = new ConfigParams(this.outerMapNumber, 'google', "nowebmap",{'lon' : 37.422858, "lat" : -122.085065, "zoom" : 15}),
+        var ipos = <IPosition>{'lon' : 37.422858, "lat" : -122.085065, "zoom" : 15},
+            cfgparams = <IConfigParams>{mapId : this.outerMapNumber, mapType : 'google', webmapId : "nowebmap", mlposition :ipos},
             mlconfig = new MLConfig(cfgparams);
         // mlconfig.setMapType('google');
         // mlconfig.setPosition({'lon' : 37.422858, "lat" : -122.085065, "zoom" : 15});
@@ -81,6 +85,7 @@ export class CanvasHolderComponent {
             appendedElem,
             mapTypeToCreate,
             newpos,
+            icfg,
             mlConfig;
         if (mlcfg) {
             mlConfig = mlcfg;
@@ -88,7 +93,8 @@ export class CanvasHolderComponent {
             if (this.mapInstanceService.hasConfigInstanceForMap(currIndex) === false) {
                 // newpos = new MLPosition({"lon": -1, "lat": -1, "zoom" : -1});
                 newpos = new MLPosition(-1, -1, -1);
-                mlConfig = new MLConfig(new ConfigParams(currIndex, 'google', "", newpos));
+                icfg = <IConfigParams>{mapId : -1, mapType : 'unknown', webmapId : '', mlposition : newpos}
+                mlConfig = new MLConfig(icfg);
                 console.log("addCanvas with index " + currIndex);
                 console.debug(mlConfig);
                 mlConfig.setConfigParams(this.mapInstanceService.getConfigInstanceForMap(

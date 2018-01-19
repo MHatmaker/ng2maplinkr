@@ -4,6 +4,8 @@ import {
 import { IPosition, MLPosition } from "../services/position.service";
 import { IConfigParams, ConfigParams } from "../services/configparams.service";
 
+console.log("loading MLConfig");
+
 @Injectable()
 export class MLConfig {
     private staticMethods = {};

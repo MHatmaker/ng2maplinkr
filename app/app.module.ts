@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 
+// import { MLPosition } from './services/position.service';
+// import { ConfigParams } from './services/configparams.service';
+// import { MLConfig } from './libs/MLConfig';
+
 import { AppComponent } from './app.component';
 import { EsriMapComponent } from './EsriMap/esrimap.component';
 import { GoogleMapComponent } from './GoogleMap/googlemap.component';
@@ -16,9 +20,6 @@ import { CarouselComponent } from './Carousel/carousel.component';
 import { DomService } from './services/dom.service';
 import { MapInstanceService } from './services/MapInstanceService';
 import { CanvasService } from './services/CanvasService';
-import { MLPosition } from './services/position.service';
-import { ConfigParams } from './services/configparams.service';
-import { MLConfig } from './libs/MLConfig';
 // import { MessageService } from './services/messageindex.service';
 // import { Broadcaster } from './services/broadcaster.service';
 import { SlideShareService } from './services/slideshare.service';
@@ -53,9 +54,9 @@ import { SlideShareService } from './services/slideshare.service';
     ESRIMapService,
     CanvasService,
     MapInstanceService,
-    MLPosition,
-    ConfigParams,
-    MLConfig,
+    // MLPosition,
+    // ConfigParams,
+    // MLConfig,
     // MessageService,
     // Broadcaster,
     SlideShareService

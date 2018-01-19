@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
 
 export interface IPosition {
-    lon? : number;
-    lat? : number;
-    zoom? : number;
+    lon : number;
+    lat : number;
+    zoom : number;
 }
+
+console.log("loading MLPosition");
 
 @Injectable()
 export class MLPosition implements IPosition {
-    // public lon : number;
-    // public lat : number;
-    // public zoom : number;
+     lon : number;
+     lat : number;
+     zoom : number;
 
-    constructor(public lon? : number, public lat? : number, public zoom? : number) { //public pos? : IPosition) {
+    constructor( lon : number,  lat : number,  zoom : number) { // pos? : IPosition) {
+        this.lon = lon;
+        this.lat = lat;
+        this.zoom = zoom;
         // if (pos) {
         //     this.lon = pos.lon;
         //     this.lat = pos.lat;

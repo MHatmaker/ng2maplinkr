@@ -1,26 +1,27 @@
 import { Injectable } from '@angular/core';
-import { MLPosition } from './position.service';
-import { IPosition } from './position.service';
+import { IPosition, MLPosition } from './position.service';
 
 export interface IConfigParams {
     mapId : number;
-    mapType? : string;
-    webmapId? : string;
-    mlposition? : MLPosition;
+    mapType : string;
+    webmapId : string;
+    mlposition : IPosition;
 }
+
+console.log("loading ConfigParams");
 
 @Injectable()
 export class ConfigParams implements IConfigParams{
-    // mapId : number;
-    // mapType : string;
-    // webmapId : string;
-    // mlposition : MLPosition;
+    mapId : number;
+    mapType : string;
+    webmapId : string;
+    mlposition : MLPosition;
 
     constructor(
-        public mapId : number  = -1,
-        public mapType? : string,
-        public webmapId? : string,
-        public mlposition? : IPosition) {
+         mapId : number  = -1,
+         mapType : string,
+         webmapId : string,
+         mlposition : IPosition) {
 
         this.mapId = mapId;
         this.mapType = mapType;
