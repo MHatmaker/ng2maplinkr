@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { MouseEvent } from '@agm/core';
+import { PlacesSearch } from '../PlacesSearch/places.component';
 
 @Component({
   selector: 'maplinkr-googlemap',
@@ -12,9 +13,9 @@ export class GoogleMapComponent implements OnInit {
   private lat: number;
   private lng: number;
   private zoom: number;
+  private places : PlacesSearch;
 
-  constructor( //private mapService: ESRIMapService,
-    private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef) { }
 
   ngOnInit() {
     // google maps zoom level
@@ -23,6 +24,8 @@ export class GoogleMapComponent implements OnInit {
     // initial center position for the map
     this.lat = 41.888941;
     this.lng = -87.620692;
+
+    this.places = new PlacesSearch(this.elementRef.nativeElement);
   }
 
   clickedMarker(label: string, index: number) {

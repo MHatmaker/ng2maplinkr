@@ -26,12 +26,7 @@ export class MLConfig {
         mapNumber: null,
         mapHoster : null,
         webmapId : "a4bb8a91ecfb4131aa544eddfbc2f1d0",
-        mlposition : null, // = new MLPosition(),
-        /*
-        lat : '',
-        lon : '',
-        zoom : '',
-        */
+        mlposition : null, 
         nginj : null,
         protocol : 'http',
         host : '', //"http://localhost",

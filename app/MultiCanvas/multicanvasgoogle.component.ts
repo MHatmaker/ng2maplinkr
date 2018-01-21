@@ -15,6 +15,7 @@ export class MultiCanvasGoogle {
     constructor(private canvasService: CanvasService) {
         console.log("ndx is " + this.canvasService.getIndex());
         this.ndx = this.canvasService.getIndex();
+
     }
     /*
             Canvas.prototype.init = function () {
