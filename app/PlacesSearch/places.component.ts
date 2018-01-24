@@ -1,27 +1,31 @@
 
-// import {} from 'google';
-import { Component, Input, ElementRef} from '@angular/core';
+import {} from 'google';
+import { Component, NgZone, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
+import {FormsModule} from '@angular/forms'
 // import { Map } from '@agm/core';
-import {} from '@types/googlemaps';
+// import {} from '@types/googlemaps';
 import { MouseEvent } from '@agm/core';
 
-declare var google;
+// declare var google;
 
 @Component({
   selector: 'places-for-maplinkr',
   template: require('./places.component.html'),
   styles: [ require('./places.component.css')]
 })
-export class PlacesSearch  {
-  @Input()
-      private searchBox : any;
-      private input : any;
+export class PlacesSearchComponent implements AfterViewInit {
+    @ViewChild("searchBox")
+    searchBoxRef: ElementRef;
+    // public searchBox : any;
+    // public input : any;
 
-  constructor(private map : google.maps.Map) {
+  // constructor(private map : google.maps.Map, private _ngZone: NgZone)
+  constructor(private _ngZone: NgZone) {
 
       // Create the search box and link it to the UI element.
-      this.input = document.getElementById('pac-input');
-      this.searchBox = new google.maps.places.SearchBox(this.input);
+      // this.input = document.getElementById('pac-input');
+      // this.searchBox = new google.maps.places.SearchBox(this.input);
+      /*
       map.controls[google.maps.ControlPosition.TOP_LEFT].push(this.input);
 
       // Bias the SearchBox results towards current map's viewport.
@@ -41,8 +45,28 @@ export class PlacesSearch  {
           return;
         }
       });
+      */
+
   }
 
+  ngAfterViewInit() {
+      let input: any = this.searchBoxRef.nativeElement;
+      console.log(this.searchBoxRef);
+      var searchBox = new google.maps.places.SearchBox(input);
+      // this.input = document.getElementById('pac-input');
+      // this.searchBox = new google.maps.places.SearchBox(this.input);
+      searchBox.addListener("places_changed", () => {
+        this._ngZone.run(() => {
+          console.log('listening');
+          console.log(searchBox);
+          var places = searchBox.getPlaces();
+          console.log(places);
+          if (places.length == 0) {
+            return;
+          }
+        })
+      });
+    }
  placeMarkers(map, places) {
 
         var markers = [];
