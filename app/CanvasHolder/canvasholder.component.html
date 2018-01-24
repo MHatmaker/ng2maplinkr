@@ -1,6 +1,9 @@
-<div id='canvasholderid' onmousedown="return false">
+<!-- <div id='canvasholderid' onmousedown="return false"> -->
+<div id='canvasholderid'>
     <button (click)="addCanvas('esri')">Esri</button>
     <button (click)="addCanvas('google')">Google</button>
     <button (click)="removeCanvas()">Remove Slide</button>
+
+    <places-for-maplinkr></places-for-maplinkr>
     <carousel #clickHandler></carousel>
 </div>
