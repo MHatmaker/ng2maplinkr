@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "5.2.1",
     "@angular/router": "5.2.1",
     "@types/arcgis-js-api": "^4.4.0",
-    "bootstrap": "3.3.7",
+    "bootstrap": "3.4.0",
     "core-js": "2.5.1",
     "jquery": "3.2.1",
     "reflect-metadata": "0.1.10",
