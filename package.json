@@ -25,7 +25,7 @@
     "@types/arcgis-js-api": "^4.4.0",
     "bootstrap": "3.3.7",
     "core-js": "2.5.1",
-    "jquery": "3.2.1",
+    "jquery": ">=3.5.0",
     "reflect-metadata": "0.1.10",
     "rxjs": "5.4.2",
     "zone.js": "0.8.17"
@@ -35,7 +35,7 @@
     "@types/core-js": "0.9.35",
     "@types/dojo": "^1.9.38",
     "@types/jasmine": "2.5.38",
-    "@types/jquery": "3.2.12",
+    "@types/jquery": ">=3.5.0",
     "@types/node": "7.0.5",
     "canonical-path": "0.0.2",
     "css-loader": "0.28.7",
